@@ -2,6 +2,8 @@ import {motion} from "motion/react";
 import {usePeople} from "@/app/providers/PeopleContext";
 import {RefObject, useEffect, useRef, useState} from "react";
 import WorkoutDisplayExerciseRow from "@/app/components/WorkoutDisplayExerciseRow";
+import PersonsPhone from "@/app/components/PersonsPhone";
+import {isIPhone} from "@react-aria/utils";
 
 interface WorkoutDisplayProps {
     index: number,
@@ -35,7 +37,7 @@ export default function WorkoutDisplay({index, screenRef}: WorkoutDisplayProps) 
             initial={{}}
             animate={{
                 opacity: (people[index].lookingAtScreen && people[index].distanceFromTopOfArea > 100) ? 1 : 0,
-                x: people[index].pos.x,
+                x: people[index].pos.x - 96, // -96 for width of rendered person element
                 // y: people[index].pos.y,
                 scale: screenRef.current && people[index].areaRef.current ?
                     people[index].distanceFromTopOfArea / people[index].areaRef.current.getBoundingClientRect().height

@@ -2,7 +2,8 @@ import {BoundingBox, motion} from "motion/react";
 import {RefObject, useRef, useState} from "react";
 import {PersonType} from "@/app/types";
 import {usePeople} from "@/app/providers/PeopleContext";
-import {Eye, EyeSlash, Person} from "@phosphor-icons/react";
+import {Eye, EyeSlash, Person, Phone} from "@phosphor-icons/react";
+import PersonsPhone from "@/app/components/PersonsPhone";
 
 export default function RenderedPerson({
                                            constraintsRef,
@@ -16,6 +17,7 @@ export default function RenderedPerson({
     const divRef = useRef<HTMLDivElement>(null);
     const {people, setPeople, setMostRecentlyMovedPerson} = usePeople();
     const [lookAtScreen, setLookAtScreen] = useState<boolean>(false);
+    const [phoneIsOpen, setPhoneIsOpen] = useState<boolean>(false);
 
     const calculateDistanceFromTop = (newPos: { x: number, y: number }) => {
         const person = people[personIndex];
@@ -82,57 +84,71 @@ export default function RenderedPerson({
     }
 
     return (
-        <motion.div
-            ref={divRef}
-            drag
-            dragConstraints={constraintsRef}
-            className={`w-24 h-24 z-50 absolute top-0 left-0 flex flex-col pointer-events-auto`}
-            initial={{
-                x: people[personIndex].pos.x,
-                y: people[personIndex].pos.y,
-            }}
-            onDragTransitionEnd={() => updatePerson()}
-            onDragEnd={() => updatePerson()}
-            onDragStart={() => updatePerson()}
-            whileDrag={{
-                pointerEvents: 'none',
-            }}
-        >
-            <Person
-                className={`stroke-white w-full h-full`}
-            />
-            <span className={`text-white h-full w-full text-center`}>
-                {personName}
-            </span>
-            <button
-                className={`flex justify-center items-center`}
-                onClick={() => {
-                    setLookAtScreen(!(lookAtScreen));
-                    const newPeople: PersonType[] = people.map((p: PersonType, i) => {
-                        if (i !== personIndex) {
-                            return p;
-                        } else {
-                            return {
-                                pos: p.pos,
-                                name: p.name,
-                                distanceFromTopOfArea: p.distanceFromTopOfArea,
-                                inArea: p.inArea,
-                                areaRef: p.areaRef,
-                                lookingAtScreen: lookAtScreen,
-                                exercises: p.exercises,
-                            };
-                        }
-                    });
-                    setPeople(newPeople);
+        <>
+            <motion.div
+                ref={divRef}
+                drag
+                dragConstraints={constraintsRef}
+                className={`w-24 h-24 z-50 absolute top-0 left-0 flex flex-col pointer-events-auto`}
+                initial={{
+                    x: people[personIndex].pos.x,
+                    y: people[personIndex].pos.y,
+                }}
+                onDragTransitionEnd={() => updatePerson()}
+                onDragEnd={() => updatePerson()}
+                onDragStart={() => updatePerson()}
+                whileDrag={{
+                    pointerEvents: 'none',
                 }}
             >
-                {lookAtScreen ?
-                    <EyeSlash size={32} weight="bold" />
-                    :
-
-                    <Eye size={32} weight="bold" />
-                }
-            </button>
-        </motion.div>
-    )
+                <Person
+                    className={`stroke-white w-full h-full`}
+                />
+                <span className={`text-white h-full w-full text-center`}>
+                    {personName}
+                </span>
+                <div className={`flex flex-row justify-center`}>
+                    <button
+                        onClick={() => {
+                            setLookAtScreen(!(lookAtScreen));
+                            const newPeople: PersonType[] = people.map((p: PersonType, i) => {
+                                if (i !== personIndex) {
+                                    return p;
+                                } else {
+                                    return {
+                                        pos: p.pos,
+                                        name: p.name,
+                                        distanceFromTopOfArea: p.distanceFromTopOfArea,
+                                        inArea: p.inArea,
+                                        areaRef: p.areaRef,
+                                        lookingAtScreen: lookAtScreen,
+                                        exercises: p.exercises,
+                                    };
+                                }
+                            });
+                            setPeople(newPeople);
+                        }}
+                    >
+                        {lookAtScreen ?
+                            <EyeSlash size={32} weight="bold"/>
+                            :
+                            <Eye size={32} weight="bold"/>
+                        }
+                    </button>
+                    <button
+                        onClick={() => {
+                            setPhoneIsOpen(!(phoneIsOpen));
+                        }}
+                    >
+                        <Phone size={32}/>
+                    </button>
+                </div>
+            </motion.div>
+            <PersonsPhone
+                personIndex={personIndex}
+                isOpen={phoneIsOpen}
+                setIsOpen={setPhoneIsOpen}
+            />
+        </>
+    );
 }

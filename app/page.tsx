@@ -93,18 +93,6 @@ export default function Home() {
                         ]
                     }],
             },
-            {
-                pos: {
-                    x: 200,
-                    y: 0,
-                },
-                name: 'Candela',
-                distanceFromTopOfArea: -1,
-                inArea: false,
-                areaRef: areaRef,
-                lookingAtScreen: true,
-                exercises: [],
-            }
         ]);
         // setAreas([
         //     {
