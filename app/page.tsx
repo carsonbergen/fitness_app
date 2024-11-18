@@ -47,7 +47,7 @@ export default function Home() {
                     x: 100,
                     y: 0,
                 },
-                name: 'Not Carson',
+                name: 'John',
                 distanceFromTopOfArea: -1,
                 inArea: false,
                 areaRef: areaRef,
@@ -77,45 +77,47 @@ export default function Home() {
                         sets: [
                             {
                                 reps: 5,
-                                weight: 225,
+                                weight: 50,
                                 done: true,
                             },
                             {
                                 reps: 4,
-                                weight: 225,
+                                weight: 50,
                                 done: true,
                             },
                             {
                                 reps: 4,
-                                weight: 225,
+                                weight: 50,
                                 done: false,
                             }
                         ]
                     }],
             },
+            {
+                pos: {
+                    x: 200,
+                    y: 0,
+                },
+                name: 'Chloe',
+                distanceFromTopOfArea: -1,
+                inArea: false,
+                areaRef: areaRef,
+                lookingAtScreen: true,
+                exercises: [],
+            },
+            {
+                pos: {
+                    x: 300,
+                    y: 0,
+                },
+                name: 'Maria',
+                distanceFromTopOfArea: -1,
+                inArea: false,
+                areaRef: areaRef,
+                lookingAtScreen: true,
+                exercises: [],
+            },
         ]);
-        // setAreas([
-        //     {
-        //         pos: {
-        //             x: 0,
-        //             y: 0,
-        //         },
-        //         size: {
-        //             width: 192,
-        //             height: 384,
-        //         }
-        //     },
-        //     {
-        //         pos: {
-        //             x: 200,
-        //             y: 0,
-        //         },
-        //         size: {
-        //             width: 192,
-        //             height: 384,
-        //         }
-        //     },
-        // ]);
     }, [mounted]);
 
     return (

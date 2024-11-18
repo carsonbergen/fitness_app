@@ -27,7 +27,7 @@ export default function PersonsPhone({isOpen, setIsOpen, personIndex}: PersonsPh
             className={`z-[9999] relative`}
         >
             <div className="fixed inset-0 flex w-screen items-center justify-center p-4">
-                <DialogPanel className="max-w-lg space-y-4 border bg-black p-12">
+                <DialogPanel className="max-w-lg space-y-4 bg-[#00000080] backdrop-blur-md p-12 rounded-md">
                     <DialogTitle className="font-bold">{`${people[personIndex].name}'s Phone`}</DialogTitle>
                     <Description>Create a new workout.</Description>
                     <p>This will delete your current workout.</p>
