@@ -3,9 +3,7 @@ import Area from "@/app/components/Area";
 import People from "@/app/components/People";
 import {usePeople} from "@/app/providers/PeopleContext";
 import {RefObject, useEffect, useRef, useState} from "react";
-import {useAreas} from "@/app/providers/AreaContext";
 import Screen from "@/app/components/Screen";
-import {PersonType} from "@/app/types";
 
 export default function Home() {
     const [mounted, setMounted] = useState<boolean>(false);
