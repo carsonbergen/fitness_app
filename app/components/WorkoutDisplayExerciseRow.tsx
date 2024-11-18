@@ -1,4 +1,4 @@
-import {Exercise, ExerciseSet, PersonType} from "@/app/types";
+import {ExerciseSet, PersonType} from "@/app/types";
 import {Check, Square, X} from "@phosphor-icons/react";
 import {usePeople} from "@/app/providers/PeopleContext";
 

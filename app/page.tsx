@@ -4,7 +4,6 @@ import People from "@/app/components/People";
 import {usePeople} from "@/app/providers/PeopleContext";
 import {RefObject, useEffect, useRef, useState} from "react";
 import {useAreas} from "@/app/providers/AreaContext";
-import Areas from "@/app/components/Areas";
 import Screen from "@/app/components/Screen";
 import {PersonType} from "@/app/types";
 
@@ -12,7 +11,6 @@ export default function Home() {
     const [mounted, setMounted] = useState<boolean>(false);
     const {people, setPeople} = usePeople();
     const areaRef: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
-    const [peopleInArea, setPeopleInArea] = useState<PersonType[]>([]);
 
     useEffect(() => {
         if (areaRef) {
@@ -23,10 +21,6 @@ export default function Home() {
     useEffect(() => {
         console.log('People:\n', people);
     }, [people]);
-
-    useEffect(() => {
-        console.log('People in area:', peopleInArea);
-    }, [peopleInArea]);
 
     useEffect(() => {
         setPeople([

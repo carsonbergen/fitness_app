@@ -1,9 +1,7 @@
 import {motion} from "motion/react";
 import {usePeople} from "@/app/providers/PeopleContext";
-import {RefObject, useEffect, useRef, useState} from "react";
+import {RefObject, useEffect, useState} from "react";
 import WorkoutDisplayExerciseRow from "@/app/components/WorkoutDisplayExerciseRow";
-import PersonsPhone from "@/app/components/PersonsPhone";
-import {isIPhone} from "@react-aria/utils";
 import {PersonType} from "@/app/types";
 
 interface WorkoutDisplayProps {
@@ -18,7 +16,6 @@ export default function WorkoutDisplay({index, screenRef}: WorkoutDisplayProps) 
     useEffect(() => {
         if (screenRef.current) {
             const boundingRect = screenRef.current.getBoundingClientRect();
-            // console.log(sboundingRect, people[index].distanceFromTopOfArea);
             console.log(boundingRect.bottom - people[index].distanceFromTopOfArea - boundingRect.y);
         }
     }, [mostRecentlyMovedPerson]);
