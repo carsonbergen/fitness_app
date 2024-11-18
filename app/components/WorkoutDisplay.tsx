@@ -4,6 +4,7 @@ import {RefObject, useEffect, useRef, useState} from "react";
 import WorkoutDisplayExerciseRow from "@/app/components/WorkoutDisplayExerciseRow";
 import PersonsPhone from "@/app/components/PersonsPhone";
 import {isIPhone} from "@react-aria/utils";
+import {PersonType} from "@/app/types";
 
 interface WorkoutDisplayProps {
     index: number,
@@ -11,7 +12,7 @@ interface WorkoutDisplayProps {
 }
 
 export default function WorkoutDisplay({index, screenRef}: WorkoutDisplayProps) {
-    const {people, mostRecentlyMovedPerson} = usePeople();
+    const {people, setPeople, mostRecentlyMovedPerson} = usePeople();
     const [workoutComplete, setWorkoutComplete] = useState<boolean>(false);
 
     useEffect(() => {
@@ -23,9 +24,10 @@ export default function WorkoutDisplay({index, screenRef}: WorkoutDisplayProps) 
     }, [mostRecentlyMovedPerson]);
 
     useEffect(() => {
-        console.log('looking at screen', people[index].lookingAtScreen, people[index].inArea)
-        console.log(people[index].lookingAtScreen && people[index].inArea)
-    }, [people[index]]);
+        if (workoutComplete && people[index].exercises.length > 0) {
+            setWorkoutComplete(false);
+        }
+    }, [index, people]);
 
     if (workoutComplete) {
         return null;
@@ -59,7 +61,23 @@ export default function WorkoutDisplay({index, screenRef}: WorkoutDisplayProps) 
             <button
                 className={`text-xl font-bold bg-black rounded-md mx-12 mt-4 mb-12`}
                 onClick={() => {
-                    setWorkoutComplete(!(workoutComplete))
+                    setWorkoutComplete(!(workoutComplete));
+                    const newPeople: PersonType[] = people.map((p: PersonType, i) => {
+                        if (i !== index) {
+                            return p;
+                        } else {
+                            return {
+                                pos: p.pos,
+                                name: p.name,
+                                distanceFromTopOfArea: p.distanceFromTopOfArea,
+                                inArea: p.inArea,
+                                areaRef: p.areaRef,
+                                lookingAtScreen: p.lookingAtScreen,
+                                exercises: [],
+                            };
+                        }
+                    });
+                    setPeople(newPeople);
                 }}
             >
                 Complete workout

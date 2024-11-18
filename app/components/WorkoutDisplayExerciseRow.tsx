@@ -21,7 +21,7 @@ export default function WorkoutDisplayExerciseRow({
             <h2 className={`text-lg font-semibold`}>{exerciseName}</h2>
             <div className={`px-4 space-y-2`}>
                 {exerciseSets.map((set, ei) => (
-                    <div key={`${exerciseName}-${ei}`} className={`flex flex-row space-x-2`}>
+                    <div key={`${exerciseName}-${ei}`} className={`flex flex-row space-x-2 justify-start items-center`}>
                         <button
                             onClick={() => {
                                 const newPeople: PersonType[] = people.map((p: PersonType, i) => {
