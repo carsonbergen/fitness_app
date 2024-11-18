@@ -2,22 +2,31 @@
 import Area from "@/app/components/Area";
 import People from "@/app/components/People";
 import {usePeople} from "@/app/providers/PeopleContext";
-import {useEffect, useState} from "react";
+import {RefObject, useEffect, useRef, useState} from "react";
 import {useAreas} from "@/app/providers/AreaContext";
 import Areas from "@/app/components/Areas";
+import Screen from "@/app/components/Screen";
+import {PersonType} from "@/app/types";
 
 export default function Home() {
     const [mounted, setMounted] = useState<boolean>(false);
     const {people, setPeople} = usePeople();
-    const {areas, setAreas} = useAreas();
+    const areaRef: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
+    const [peopleInArea, setPeopleInArea] = useState<PersonType[]>([]);
 
     useEffect(() => {
-        setMounted(true);
-    }, []);
+        if (areaRef) {
+            setMounted(true);
+        }
+    }, [areaRef]);
 
     useEffect(() => {
         console.log('People:\n', people);
     }, [people]);
+
+    useEffect(() => {
+        console.log('People in area:', peopleInArea);
+    }, [peopleInArea]);
 
     useEffect(() => {
         setPeople([
@@ -26,21 +35,33 @@ export default function Home() {
                     x: 0,
                     y: 0,
                 },
-                name: 'Carson'
+                name: 'Carson',
+                distanceFromTopOfArea: -1,
+                inArea: false,
+                areaRef: areaRef,
+                lookingAtScreen: true,
             },
             {
                 pos: {
                     x: 100,
                     y: 0,
                 },
-                name: 'Not Carson'
+                name: 'Not Carson',
+                distanceFromTopOfArea: -1,
+                inArea: false,
+                areaRef: areaRef,
+                lookingAtScreen: true,
             },
             {
                 pos: {
                     x: 200,
                     y: 0,
                 },
-                name: 'Candela'
+                name: 'Candela',
+                distanceFromTopOfArea: -1,
+                inArea: false,
+                areaRef: areaRef,
+                lookingAtScreen: true,
             }
         ]);
         // setAreas([
@@ -68,10 +89,17 @@ export default function Home() {
     }, [mounted]);
 
     return (
-        <div className={`flex bg-gray-700 w-screen h-screen`}>
-            <People/>
-            <div className={`pt-24`}>
-                <Area/>
+        <div className={`flex bg-gray-700 w-screen h-screen overflow-clip`}>
+            <People
+                areaRef={areaRef}
+            />
+            <div className={``}>
+                <Area
+                    peopleInArea={peopleInArea}
+                    setPeopleInArea={setPeopleInArea}
+                    areaRef={areaRef}
+                />
+                <Screen/>
             </div>
         </div>
     );
