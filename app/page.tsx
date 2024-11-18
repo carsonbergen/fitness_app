@@ -40,6 +40,7 @@ export default function Home() {
                 inArea: false,
                 areaRef: areaRef,
                 lookingAtScreen: true,
+                exercises: [],
             },
             {
                 pos: {
@@ -51,6 +52,46 @@ export default function Home() {
                 inArea: false,
                 areaRef: areaRef,
                 lookingAtScreen: true,
+                exercises: [{
+                    name: 'Bench Press',
+                    sets: [
+                        {
+                            reps: 5,
+                            weight: 225,
+                            done: true,
+                        },
+                        {
+                            reps: 4,
+                            weight: 225,
+                            done: true,
+                        },
+                        {
+                            reps: 4,
+                            weight: 225,
+                            done: false,
+                        }
+                    ]
+                },
+                    {
+                        name: 'Bicep Curl',
+                        sets: [
+                            {
+                                reps: 5,
+                                weight: 225,
+                                done: true,
+                            },
+                            {
+                                reps: 4,
+                                weight: 225,
+                                done: true,
+                            },
+                            {
+                                reps: 4,
+                                weight: 225,
+                                done: false,
+                            }
+                        ]
+                    }],
             },
             {
                 pos: {
@@ -62,6 +103,7 @@ export default function Home() {
                 inArea: false,
                 areaRef: areaRef,
                 lookingAtScreen: true,
+                exercises: [],
             }
         ]);
         // setAreas([
@@ -89,14 +131,12 @@ export default function Home() {
     }, [mounted]);
 
     return (
-        <div className={`flex bg-gray-700 w-screen h-screen overflow-clip`}>
+        <div className={`flex bg-black w-screen h-screen overflow-clip`}>
             <People
                 areaRef={areaRef}
             />
-            <div className={``}>
+            <div>
                 <Area
-                    peopleInArea={peopleInArea}
-                    setPeopleInArea={setPeopleInArea}
                     areaRef={areaRef}
                 />
                 <Screen/>

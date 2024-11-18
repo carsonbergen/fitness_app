@@ -18,7 +18,7 @@ export default function Screen() {
     return (
         <motion.div
             ref={constraintsRef}
-            className={`w-screen h-[500px] z-10`}
+            className={`w-screen h-[60vh] z-10`}
         >
             <div
                 className={`bg-gradient-to-br from-green-400 to-purple-300 rounded-md w-full h-full relative z-0`}

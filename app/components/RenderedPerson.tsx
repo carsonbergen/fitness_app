@@ -72,6 +72,7 @@ export default function RenderedPerson({
                         inArea: checkIfPersonIsInsideArea(),
                         areaRef: p.areaRef,
                         lookingAtScreen: p.lookingAtScreen,
+                        exercises: p.exercises,
                     };
                 }
             });
@@ -118,6 +119,7 @@ export default function RenderedPerson({
                                 inArea: p.inArea,
                                 areaRef: p.areaRef,
                                 lookingAtScreen: lookAtScreen,
+                                exercises: p.exercises,
                             };
                         }
                     });
