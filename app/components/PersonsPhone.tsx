@@ -3,7 +3,7 @@ import {usePeople} from "@/app/providers/PeopleContext";
 
 import EXERCISES from '../constants.json';
 import {useEffect, useState} from "react";
-import {Exercise} from "@/app/types";
+import {Exercise, PersonType} from "@/app/types";
 import {twMerge} from "tailwind-merge";
 
 interface PersonsPhoneProps {
@@ -70,12 +70,37 @@ export default function PersonsPhone({isOpen, setIsOpen, personIndex}: PersonsPh
                     </div>
                     <div className="flex gap-4">
                         <button
+                            className={`bg-red-300 text-black p-1 rounded-md`}
                             onClick={() => {
                                 setIsOpen(false);
                                 setNewExercises([]);
                             }}
                         >
                             Cancel
+                        </button>
+                        <button
+                            className={`bg-green-300 text-black p-1 rounded-md`}
+                            onClick={() => {
+                                const newPeople: PersonType[] = people.map((p: PersonType, i) => {
+                                    if (i !== personIndex) {
+                                        return p;
+                                    } else {
+                                        return {
+                                            pos: p.pos,
+                                            name: p.name,
+                                            distanceFromTopOfArea: p.distanceFromTopOfArea,
+                                            inArea: p.inArea,
+                                            areaRef: p.areaRef,
+                                            lookingAtScreen: p.lookingAtScreen,
+                                            exercises: newExercises,
+                                        };
+                                    }
+                                });
+                                setPeople(newPeople);
+                                setIsOpen(false);
+                            }}
+                        >
+                            Set Exercises
                         </button>
                     </div>
                 </DialogPanel>
