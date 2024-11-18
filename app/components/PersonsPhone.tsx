@@ -16,6 +16,10 @@ export default function PersonsPhone({isOpen, setIsOpen, personIndex}: PersonsPh
     const {people, setPeople} = usePeople();
     const [newExercises, setNewExercises] = useState<Exercise[]>(people[personIndex].exercises);
 
+    useEffect(() => {
+        setNewExercises(people[personIndex].exercises);
+    }, [people]);
+
     return (
         <Dialog
             open={isOpen}
@@ -69,7 +73,6 @@ export default function PersonsPhone({isOpen, setIsOpen, personIndex}: PersonsPh
                             className={`bg-red-300 text-black p-1 rounded-md`}
                             onClick={() => {
                                 setIsOpen(false);
-                                setNewExercises([]);
                             }}
                         >
                             Cancel
