@@ -1,6 +1,6 @@
 import {motion} from "motion/react";
 import {usePeople} from "@/app/providers/PeopleContext";
-import {RefObject, useEffect, useRef} from "react";
+import {RefObject, useEffect, useRef, useState} from "react";
 import WorkoutDisplayExerciseRow from "@/app/components/WorkoutDisplayExerciseRow";
 
 interface WorkoutDisplayProps {
@@ -10,6 +10,7 @@ interface WorkoutDisplayProps {
 
 export default function WorkoutDisplay({index, screenRef}: WorkoutDisplayProps) {
     const {people, mostRecentlyMovedPerson} = usePeople();
+    const [workoutComplete, setWorkoutComplete] = useState<boolean>(false);
 
     useEffect(() => {
         if (screenRef.current) {
@@ -23,6 +24,10 @@ export default function WorkoutDisplay({index, screenRef}: WorkoutDisplayProps) 
         console.log('looking at screen', people[index].lookingAtScreen, people[index].inArea)
         console.log(people[index].lookingAtScreen && people[index].inArea)
     }, [people[index]]);
+
+    if (workoutComplete) {
+        return null;
+    }
 
     return (
         <motion.div
@@ -49,6 +54,14 @@ export default function WorkoutDisplay({index, screenRef}: WorkoutDisplayProps) 
                     exerciseIndex={i}
                 />
             ))}
+            <button
+                className={`text-xl font-bold bg-black rounded-md mx-12 mt-4 mb-12`}
+                onClick={() => {
+                    setWorkoutComplete(!(workoutComplete))
+                }}
+            >
+                Complete workout
+            </button>
         </motion.div>
     );
 }
