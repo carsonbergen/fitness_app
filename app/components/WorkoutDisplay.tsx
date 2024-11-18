@@ -35,7 +35,7 @@ export default function WorkoutDisplay({index, screenRef}: WorkoutDisplayProps) 
 
     return (
         <motion.div
-            className={`absolute flex flex-col justify-start w-fit h-96 overflow-scroll bg-[#00000080] px-2 rounded-md backdrop-blur-md`}
+            className={`absolute flex flex-col justify-start w-96 h-96 overflow-scroll bg-[#00000080] px-2 rounded-md backdrop-blur-md`}
             initial={{}}
             animate={{
                 opacity: (people[index].lookingAtScreen && people[index].distanceFromTopOfArea > 100) ? 1 : 0,

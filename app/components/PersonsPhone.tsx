@@ -14,11 +14,7 @@ interface PersonsPhoneProps {
 
 export default function PersonsPhone({isOpen, setIsOpen, personIndex}: PersonsPhoneProps) {
     const {people, setPeople} = usePeople();
-    const [newExercises, setNewExercises] = useState<Exercise[]>([]);
-
-    useEffect(() => {
-        console.log(newExercises)
-    }, [newExercises]);
+    const [newExercises, setNewExercises] = useState<Exercise[]>(people[personIndex].exercises);
 
     return (
         <Dialog

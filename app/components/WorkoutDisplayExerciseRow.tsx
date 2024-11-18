@@ -75,7 +75,8 @@ export default function WorkoutDisplayExerciseRow({
                                 font-bold
                                 bg-black
                                 rounded-md
-                                p-2
+                                p-2 
+                                w-24
                             `}
                             type="number"
                             value={set.reps}
@@ -128,6 +129,7 @@ export default function WorkoutDisplayExerciseRow({
                                 bg-black
                                 rounded-md
                                 p-2
+                                w-24
                             `}
                             type="number"
                             value={set.weight}
